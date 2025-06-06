@@ -42,7 +42,8 @@ class HomeController extends Controller
         return view('welcome');
     }
 
-    public function sinPermiso() {
+    public function sinPermiso()
+    {
         return view('errors.permiso');
     }
 
@@ -58,26 +59,31 @@ class HomeController extends Controller
         return view('home', compact('areas', 'user', 'databaseName', 'superUser'));
     }
 
-    public function reportesActivos() {
+    public function reportesActivos()
+    {
         $tipos = Tipos::all();
         $resultados = [];
         return view('reportes', compact('tipos', 'resultados'));
     }
-    
-    public function selectActivos(Request $request) {
+
+    public function selectActivos(Request $request)
+    {
         $query = $request->input('name');
         $activos = Activo::where('activo', 'like', '%' . $query . '%')
-        //->orWhere('ap_paterno', 'like', '%' . $query . '%')
-        ->get();
+            //->orWhere('ap_paterno', 'like', '%' . $query . '%')
+            ->get();
         return response()->json($activos);
     }
 
-    public function mostrarResultados(Request $request) {
+    public function mostrarResultados(Request $request)
+    {
         $tipos = Tipos::all();
         $query1 = $request->input('activo');
-        $resultados = Item::where('activo_id', $query1)->get();
+        $resultados = Item::with(['activo', 'area', 'tipo', 'Estado'])
+            ->where('activo_id', $query1)
+            ->get();
+
         $num = 1;
         return view('reportes', compact('tipos', 'resultados', 'num'));
     }
-
 }

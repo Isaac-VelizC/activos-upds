@@ -56,6 +56,12 @@ class BackupController extends Controller
         }
     }
 
+    /**
+     * mysqldump --version
+     * sudo apt install mysql-client
+     */
+    
+
     /*public function crearBackup()
     {
         $db = env('DB_DATABASE');

@@ -73,10 +73,10 @@
                                 <tr>
                                     <th scope="row">{{ $num++ }}</th>
                                     <td>{{ $item->codigo }}</td>
-                                    <td>{{ $item->activo->activo }}</td>
-                                    <td>{{ $item->area->nombre }}</td>
-                                    <td>{{ $item->tipo->nombre }}</td>
-                                    <td>{{ $item->Estado->estado }}</td>
+                                    <td>{{ optional($item->activo)->activo }}</td>
+                                    <td>{{ optional($item->area)->nombre }}</td>
+                                    <td>{{ optional($item->tipo)->nombre }}</td>
+                                    <td>{{ optional($item->Estado)->estado }}</td>
                                 </tr>
                                 @endforeach
                                 @endif
